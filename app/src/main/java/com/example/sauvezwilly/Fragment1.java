@@ -25,6 +25,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.Objects;
 
 import org.tensorflow.lite.Interpreter;
 
@@ -40,6 +41,7 @@ public class Fragment1 extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        super.onCreate(savedInstanceState);
         final View rootView = inflater.inflate(R.layout.fragment1_layout,
                 container, false);
 
@@ -50,9 +52,9 @@ public class Fragment1 extends Fragment {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 checkPermission(Manifest.permission.CAMERA, CAMERA_PERMISSION_CODE);
-                startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAMERA_PERMISSION_CODE);
 
             }
         });
@@ -62,10 +64,10 @@ public class Fragment1 extends Fragment {
 
     public void checkPermission(String permission, int requestCode)
     {
-        if (ContextCompat.checkSelfPermission(getContext(), permission) == PackageManager.PERMISSION_DENIED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), permission) == PackageManager.PERMISSION_DENIED) {
 
             // Requesting the permission
-            ActivityCompat.requestPermissions(getActivity(), new String[] { permission }, requestCode);
+            ActivityCompat.requestPermissions(requireActivity(), new String[] { permission }, requestCode);
         }
         else {
             Toast.makeText(getContext(), "Permission already granted", Toast.LENGTH_SHORT).show();
@@ -92,7 +94,7 @@ public class Fragment1 extends Fragment {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
+        if (requestCode == CAMERA_PERMISSION_CODE) {
             if (resultCode == Activity.RESULT_OK) {
 
                 Bitmap bmp = (Bitmap) data.getExtras().get("data");
