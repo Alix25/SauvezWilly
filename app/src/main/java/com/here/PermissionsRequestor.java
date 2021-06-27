@@ -28,6 +28,8 @@ import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.example.sauvezwilly.Fragment2;
+
 import java.util.ArrayList;
 
 //import android.support.annotation.NonNull;
@@ -43,7 +45,7 @@ public class PermissionsRequestor {
     private ResultListener resultListener;
     private final Activity activity;
 
-    public PermissionsRequestor(Activity activity) {
+    public PermissionsRequestor(Fragment2 activity) {
         this.activity = activity;
     }
 
