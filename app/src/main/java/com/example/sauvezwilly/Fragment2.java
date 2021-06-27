@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.here.PermissionsRequestor;
+//import com.here.PermissionsRequestor;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapview.*;
 
@@ -87,7 +87,7 @@ import com.here.sdk.mapview.*;
 
 public class Fragment2 extends Fragment{
     private static final String TAG = Fragment2.class.getSimpleName();
-    private PermissionsRequestor permissionsRequestor;
+   // private PermissionsRequestor permissionsRequestor;
     private MapView mapView ;
 
     @Nullable
@@ -104,7 +104,7 @@ public class Fragment2 extends Fragment{
             }
         });
         //ask permission
-        handleAndroidPermissions();
+       // handleAndroidPermissions();
         loadMapScene();
         return inflater.inflate(R.layout.fragment2_layout, container, false);
     }
@@ -128,7 +128,7 @@ public class Fragment2 extends Fragment{
         loadMapScene();
     }*/
 
-    private void handleAndroidPermissions() {
+ /*   private void handleAndroidPermissions() {
         permissionsRequestor = new PermissionsRequestor(this);
         permissionsRequestor.request(new PermissionsRequestor.ResultListener(){
 
@@ -148,7 +148,7 @@ public class Fragment2 extends Fragment{
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         permissionsRequestor.onRequestPermissionsResult(requestCode, grantResults);
-    }
+    }*/
 
     private void loadMapScene(){
         mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY,mapError -> {

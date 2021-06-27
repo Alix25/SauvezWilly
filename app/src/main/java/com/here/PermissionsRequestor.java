@@ -27,6 +27,7 @@ import android.os.Build;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 
 import com.example.sauvezwilly.Fragment2;
 
@@ -39,13 +40,13 @@ import java.util.ArrayList;
 /**
  * Convenience class to request the Android permissions as defined by manifest.
  */
-public class PermissionsRequestor {
+/*public class PermissionsRequestor {
 
     private static final int PERMISSIONS_REQUEST_CODE = 42;
     private ResultListener resultListener;
-    private final Activity activity;
+    private final Fragment activity;
 
-    public PermissionsRequestor(Fragment2 activity) {
+    public PermissionsRequestor(Fragment activity) {
         this.activity = activity;
     }
 
@@ -61,17 +62,17 @@ public class PermissionsRequestor {
         if (missingPermissions.length == 0) {
             resultListener.permissionsGranted();
         } else {
-            ActivityCompat.requestPermissions(activity, missingPermissions, PERMISSIONS_REQUEST_CODE);
+          //  ActivityCompat.requestPermissions(activity, missingPermissions, PERMISSIONS_REQUEST_CODE);
         }
     }
 
     private String[] getPermissionsToRequest() {
         ArrayList<String> permissionList = new ArrayList<>();
         try {
-            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(
-                    activity.getPackageName(), PackageManager.GET_PERMISSIONS);
-            if (packageInfo.requestedPermissions != null) {
-                for (String permission : packageInfo.requestedPermissions) {
+        //    PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(
+              //      activity.getPackageName(), PackageManager.GET_PERMISSIONS);
+         //   if (packageInfo.requestedPermissions != null) {
+           /*     for (String permission : packageInfo.requestedPermissions) {
                     if (ContextCompat.checkSelfPermission(
                             activity, permission) != PackageManager.PERMISSION_GRANTED) {
                         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M &&
@@ -88,6 +89,7 @@ public class PermissionsRequestor {
                         }
                         permissionList.add(permission);
                     }
+
                 }
             }
         } catch (Exception e) {
@@ -119,4 +121,4 @@ public class PermissionsRequestor {
             }
         }
     }
-}
+}*/
