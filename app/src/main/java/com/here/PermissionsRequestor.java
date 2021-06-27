@@ -25,6 +25,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -40,13 +41,13 @@ import java.util.ArrayList;
 /**
  * Convenience class to request the Android permissions as defined by manifest.
  */
-/*public class PermissionsRequestor {
+public class PermissionsRequestor {
 
     private static final int PERMISSIONS_REQUEST_CODE = 42;
     private ResultListener resultListener;
-    private final Fragment activity;
+    private final AppCompatActivity activity;
 
-    public PermissionsRequestor(Fragment activity) {
+    public PermissionsRequestor(AppCompatActivity activity) {
         this.activity = activity;
     }
 
@@ -69,12 +70,11 @@ import java.util.ArrayList;
     private String[] getPermissionsToRequest() {
         ArrayList<String> permissionList = new ArrayList<>();
         try {
-        //    PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(
-              //      activity.getPackageName(), PackageManager.GET_PERMISSIONS);
-         //   if (packageInfo.requestedPermissions != null) {
-           /*     for (String permission : packageInfo.requestedPermissions) {
-                    if (ContextCompat.checkSelfPermission(
-                            activity, permission) != PackageManager.PERMISSION_GRANTED) {
+            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(
+                    activity.getPackageName(), PackageManager.GET_PERMISSIONS);
+            if (packageInfo.requestedPermissions != null) {
+                for (String permission : packageInfo.requestedPermissions) {
+                    if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.M &&
                                 permission.equals(Manifest.permission.CHANGE_NETWORK_STATE)) {
                             // Exclude CHANGE_NETWORK_STATE as it does not require explicit user approval.
@@ -121,4 +121,4 @@ import java.util.ArrayList;
             }
         }
     }
-}*/
+}
