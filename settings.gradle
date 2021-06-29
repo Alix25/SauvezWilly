@@ -1,2 +1,3 @@
+include ':heresdk-explore-android-4.7.6.0.5777'
 include ':app'
 rootProject.name = "Sauvez Willy"

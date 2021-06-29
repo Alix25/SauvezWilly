@@ -1,89 +1,22 @@
 package com.example.sauvezwilly;
 
+
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.core.app.ComponentActivity;
 
-//import com.here.PermissionsRequestor;
+
 import com.here.PermissionsRequestor;
 import com.here.sdk.core.GeoCoordinates;
 import com.here.sdk.mapview.*;
-
-
-
-/*public class Fragment2 extends Fragment {
-    private static final String TAG = Fragment2.class.getSimpleName();
-    private PermissionsRequestor permissionsRequestor;
-    private MapView mapView ;
-
-
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-       // super.onCreate(savedInstanceState);
-        MapsInitializer.initialize(getActivity());
-
-        if (mapView != null) {
-            mapView.onCreate(savedInstanceState);
-        }
-        loadMapScene();
-
-    }
-    private void loadMapScene(){
-        mapView.getMapScene().loadScene(MapScheme.NORMAL_DAY, mapError -> {
-            if (mapError == null){
-                mapView.getCamera().lookAt(new GeoCoordinates(52.5,13.3,10000));
-            }else{
-                Log.d(TAG, "Loading map failed: mapError: " + mapError.name());
-            }
-        });
-
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        final LinearLayout parent = (LinearLayout) inflater.inflate(R.layout.fragment2_layout, container, false);
-        mapView = (MapView) parent.findViewById(R.id.map_view);
-        return parent;
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        mapView.onSaveInstanceState(outState);
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        mapView.onResume();
-        loadMapScene();
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        mapView.onPause();
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        mapView.onDestroy();
-    }
-
-
-}*/
-
 
 
 
@@ -91,13 +24,18 @@ public class Fragment2 extends AppCompatActivity {
     private static final String TAG = Fragment2.class.getSimpleName();
     private PermissionsRequestor permissionsRequestor;
     private MapView mapView ;
-
+    private GeoCoordinates currentLocation;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment2_layout);
         mapView = findViewById(R.id.map_view);
         mapView.onCreate(savedInstanceState);
+        Bundle b = getIntent().getExtras();
+
+        if (b != null) {
+            currentLocation = new GeoCoordinates(b.getDouble("locationLatitude"), b.getDouble("locationLongitude"));
+        }
         mapView.setOnReadyListener(new MapView.OnReadyListener() {
             @Override
             public void onMapViewReady() {
@@ -110,7 +48,26 @@ public class Fragment2 extends AppCompatActivity {
 //ask permission
         handleAndroidPermissions();
         loadMapScene();
+        ImageButton reportButton = findViewById(R.id.reportButton);
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(Fragment2.this,"It works",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(Fragment2.this, Fragment1.class);
+                //can not pass GeoCoordinates so we pass the data to rebuild it after
+                //double latitude = currentLocation.latitude;
+                //double longitude = currentLocation.longitude;
+                //intent.putExtra("locationLatitude", latitude);
+                //intent.putExtra("locationLongitude", longitude);
+                startActivity(intent);
+                //end the activity because because we don't want to go back but we want to restart it after
+                //finish();
+
+            }
+        });
     }
+
+
 
     private void handleAndroidPermissions() {
         permissionsRequestor = new PermissionsRequestor(this);

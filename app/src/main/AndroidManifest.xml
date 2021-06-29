@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.sauvezwilly">
     <uses-permission android:name="android.permission.CAMERA" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -22,7 +22,7 @@
         <meta-data android:name="com.here.sdk.access_key_id" android:value="Xf8hEsPvAUm3kjYPOo74kA"/>
         <meta-data android:name="com.here.sdk.access_key_secret" android:value="zAwZR623asujKwgDqvu-3lYqMwk1s1jfD1oKs9IyvyHV4j3zzt73LMwMkk1rLCftijV6WVbcJhcRXANFik25Pg"/>
         <activity
-            android:name=".MainActivity"
+            android:name=".Fragment2"
             android:label="@string/app_name"
             android:theme="@style/Theme.SauvezWilly.NoActionBar">
             <intent-filter>
